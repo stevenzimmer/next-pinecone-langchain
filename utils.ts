@@ -3,7 +3,7 @@ import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 import { OpenAI } from "langchain/llms/openai";
 import {loadQAStuffChain} from "langchain/chains"
 import {Document} from "langchain/document"
-import { timeout, indexName } from "./config";
+import { timeout } from "./config";
 
 export const createPineconeIndex = async (
   client,
@@ -123,9 +123,7 @@ export const queryPineconeVectorStoreAndQueryLLM = async (
   console.log(`Asking question: ${question}`);
 
   if(queryResponse.matches.length) {
-    const llm = new OpenAI({
-
-    });
+    const llm = new OpenAI();
 
     const chain = loadQAStuffChain(llm);
 

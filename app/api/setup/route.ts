@@ -5,6 +5,7 @@ import { PineconeClient } from "@pinecone-database/pinecone";
 import {TextLoader} from "langchain/document_loaders/fs/text";
 import {PDFLoader} from "langchain/document_loaders/fs/pdf";
 
+
 import {DirectoryLoader} from "langchain/document_loaders/fs/directory";
 
 import { createPineconeIndex, updatePinecone } from "@/utils";
@@ -15,7 +16,7 @@ export async function POST() {
   const loader = new DirectoryLoader("./documents", {
     ".txt": (path) => new TextLoader(path),
     ".md": (path) => new TextLoader(path),
-    ".pdf": (path) => new PDFLoader(path)
+    ".pdf": (path) => new PDFLoader(path),
   });
 
   const docs = await loader.load();
