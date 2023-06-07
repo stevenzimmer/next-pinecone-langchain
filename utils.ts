@@ -1,6 +1,8 @@
 import {OpenAIEmbeddings} from "langchain/embeddings/openai";
 import {RecursiveCharacterTextSplitter} from "langchain/text_splitter"; 
 import { OpenAI } from "langchain/llms/openai";
+// import { OpenAIChat } from "langchain/llms";
+
 import {loadQAStuffChain} from "langchain/chains"
 import {Document} from "langchain/document"
 import { timeout } from "./config";
@@ -123,22 +125,45 @@ export const queryPineconeVectorStoreAndQueryLLM = async (
   console.log(`Asking question: ${question}`);
 
   if(queryResponse.matches.length) {
+    // console.log("query response matches");
+
+    // console.log("new Open AI llm");
+    
+      
+    
     const llm = new OpenAI();
+
+    // console.log({loadQAStuffChain});
+
+    // console.log("load qa stuff chain");
 
     const chain = loadQAStuffChain(llm);
 
+    // console.log({chain});
+
+    // console.log("concatenated page content");
+
     const concatendatePageContent = queryResponse.matches.map((match) => match.metadata.pageContent).join(" ");
 
+    // console.log({concatendatePageContent});
+
+    // console.log("result");
+   
     const result = await chain.call({
       input_documents: [new Document({ pageContent: concatendatePageContent})],
       question
     });
 
-    console.log(`Answer: ${result.text}`);
+    // console.log({result});
+
+    // console.log(`Answer: ${result.text}`);
 
     return result.text;
+
   } else {
-    // No Matches
     console.log("Since no matches, GPT3 will not be queried");
+    // No Matches
+    return "There were no matches for your query";
+    
   }
 }
