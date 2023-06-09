@@ -1,5 +1,5 @@
 "use client"
-import { use, useState, useEffect } from "react"
+import {  useState } from "react"
 
 export default function Home() {
   const [query, setQuery] = useState<string>("");

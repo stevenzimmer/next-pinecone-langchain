@@ -2,6 +2,11 @@ import {OpenAIEmbeddings} from "langchain/embeddings/openai";
 import {RecursiveCharacterTextSplitter} from "langchain/text_splitter"; 
 import { OpenAI } from "langchain/llms/openai";
 // import { OpenAIChat } from "langchain/llms";
+import { PromptTemplate } from "langchain";
+import {StructuredOutputParser} from "langchain/output_parsers";
+import {ResponseSchema} from "langchain/output_parsers"
+
+import {GoogleDriveLoader} from "langchain/document_loaders/fs/"
 
 import {loadQAStuffChain} from "langchain/chains"
 import {Document} from "langchain/document"
@@ -131,7 +136,10 @@ export const queryPineconeVectorStoreAndQueryLLM = async (
     
       
     
-    const llm = new OpenAI();
+    const llm = new OpenAI({
+      temperature: 0.9
+      
+    });
 
     // console.log({loadQAStuffChain});
 
