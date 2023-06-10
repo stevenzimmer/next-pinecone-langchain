@@ -4,9 +4,9 @@ import { OpenAI } from "langchain/llms/openai";
 // import { OpenAIChat } from "langchain/llms";
 import { PromptTemplate } from "langchain";
 import {StructuredOutputParser} from "langchain/output_parsers";
-import {ResponseSchema} from "langchain/output_parsers"
 
-import {GoogleDriveLoader} from "langchain/document_loaders/fs/"
+
+import {GoogleDriveLoader} from "langchain/document_loaders/web/"
 
 import {loadQAStuffChain} from "langchain/chains"
 import {Document} from "langchain/document"
@@ -40,6 +40,7 @@ export const createPineconeIndex = async (
     console.log(`Creating index... Please wait for it to finish initializing`);
 
     await new Promise((resolve) => setTimeout(resolve, timeout));
+    
   } else {
     console.log(`${indexName} already exists`);
   }

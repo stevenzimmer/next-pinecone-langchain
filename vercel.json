@@ -1,0 +1,6 @@
+{
+  "crons": [{
+    "path": "/api/generate?apiKey=sharedKey&query=Breaking%20News",
+    "schedule": "*/10 * * * *"
+  }]
+}
